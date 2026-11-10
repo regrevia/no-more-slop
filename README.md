@@ -49,7 +49,7 @@ default value  →  control (select / switch)  →  one line of consequence  →
 
 ```bash
 # 1. run the gate on your UI (no deps, Node >= 18)
-npx no-more-slop ./src
+npx github:regrevia/no-more-slop ./src
 # or from a checkout
 node scripts/ui-strings-lint.mjs ./src
 

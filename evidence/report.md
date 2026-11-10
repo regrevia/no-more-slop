@@ -54,8 +54,8 @@
 
 | 目录 | 文件 | 可见串 | 命中 | 命中率 | 抽检 |
 |---|---|---|---|---|---|
-| `symate/src/plugins` | 139 | 789 | 32 | 4.1% | 全为真缺陷：`仅显示逻辑费用，删除后额度需等待核对。已发出的预览不会因此撤销。`、`删除结果未确认，请核查；…`、`请填写有效的 HTTPS API 地址` |
-| `symate/agent-cli/src/user` | 15 | 180 | 30 | 16.7% | `agents.ts:52` 真阳性（真阳性目标达成）：`结果未知时先查询 Agent；若重交，保留同一创建请求 ID 和原始定义。` → implementation-leak + prose-block |
+| `src/plugins` | 139 | 789 | 32 | 4.1% | 全为真缺陷：`仅显示逻辑费用，删除后额度需等待核对。已发出的预览不会因此撤销。`、`删除结果未确认，请核查；…`、`请填写有效的 HTTPS API 地址` |
+| `agent-cli/src/user` | 15 | 180 | 30 | 16.7% | `agents.ts:52` 真阳性（真阳性目标达成）：`结果未知时先查询 Agent；若重交，保留同一创建请求 ID 和原始定义。` → implementation-leak + prose-block |
 
 对照组（同一仓库、旧扫描器扫全文）：`dev-term` 1355 命中、`status-dump` 1006 命中，绝大多数是 `home: f.home,` / `model: null,` 这类对象键值 → 旧版只能当气味探测器，**本版可上 CI**（exit 1）。
 
@@ -71,10 +71,10 @@
 ## 5. 复跑清单
 
 ```bash
-cd /Users/apple/Desktop/work/Symate/tools/ui-copy
+cd $REPO
 node evals/validate-cases.mjs
 node evals/score.mjs --cases evals/cases.jsonl --bad
-node scripts/ui-strings-lint.mjs ../../symate/src/plugins        # 期望 32 error 左右
+node scripts/ui-strings-lint.mjs ../../src/plugins        # 期望 32 error 左右
 node evals/extract-strings.mjs evidence/abcode/baseline          # 量可见串/字数
 ```
 
