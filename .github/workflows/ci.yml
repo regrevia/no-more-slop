@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Dataset self-check
+        run: node evals/validate-cases.mjs
+      - name: Bad-sample recall (must be 100%)
+        run: node evals/score.mjs --cases evals/cases.jsonl --bad
+      - name: Hard cases
+        run: node evals/score.mjs --cases evals/cases-hard.jsonl --bad
+      - name: Rules never flag the curated clean examples
+        run: node scripts/ui-strings-lint.mjs examples --warn-only

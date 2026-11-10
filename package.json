@@ -1,0 +1,18 @@
+{
+  "name": "no-more-slop",
+  "version": "3.0.0",
+  "description": "Stop AI-flavored UI copy: a rule set, a CI gate and a regression suite for interface text that explains, hedges and buries the decision.",
+  "type": "module",
+  "bin": { "no-more-slop": "scripts/ui-strings-lint.mjs" },
+  "files": ["scripts", "evals", "reference", "evidence", "SKILL.md", "docs"],
+  "scripts": {
+    "lint": "node scripts/ui-strings-lint.mjs",
+    "test": "node evals/validate-cases.mjs && node evals/score.mjs --cases evals/cases.jsonl --bad && node evals/score.mjs --cases evals/cases-hard.jsonl --bad",
+    "self-check": "node scripts/ui-strings-lint.mjs examples --warn-only"
+  },
+  "engines": { "node": ">=18" },
+  "keywords": ["ui", "copy", "microcopy", "i18n", "chinese", "ai-slop", "lint", "design", "product-design"],
+  "license": "MIT",
+  "author": "谭懿铖 (Tan Yicheng)",
+  "repository": { "type": "git", "url": "git+https://github.com/regrevia/no-more-slop.git" }
+}
